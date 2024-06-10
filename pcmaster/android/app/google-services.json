@@ -1,0 +1,91 @@
+{
+  "project_info": {
+    "project_number": "275311872950",
+    "firebase_url": "https://login-be8a2-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "login-be8a2",
+    "storage_bucket": "login-be8a2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:275311872950:android:5cc7b17112106dcad38f17",
+        "android_client_info": {
+          "package_name": "com.example.pcmaster"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "275311872950-1r592d6adhe7rvjg7l3g747ac5voh68j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWR4Shf9cSCcgoYMhIDFgpzrVVF4i7AO4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "275311872950-1r592d6adhe7rvjg7l3g747ac5voh68j.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "275311872950-55kl35fqd34nsggkkaehq0nh692jt9mv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "pcmaster"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:275311872950:android:8029242110a45e5ad38f17",
+        "android_client_info": {
+          "package_name": "com.pcmaster.pcmaster"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "275311872950-kkog7kjig9beoe08iitimnb6d7ntpupc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pcmaster.pcmaster",
+            "certificate_hash": "bcbe2adb716e20562c05e11737a06901ef0edcc4"
+          }
+        },
+        {
+          "client_id": "275311872950-1r592d6adhe7rvjg7l3g747ac5voh68j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWR4Shf9cSCcgoYMhIDFgpzrVVF4i7AO4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "275311872950-1r592d6adhe7rvjg7l3g747ac5voh68j.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "275311872950-55kl35fqd34nsggkkaehq0nh692jt9mv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "pcmaster"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

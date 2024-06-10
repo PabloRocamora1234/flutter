@@ -123,11 +123,11 @@ enum WidgetInspectorServiceExtensions {
   structuredErrors,
 
   /// Name of service extension that, when called, will change the value of
-  /// [WidgetsApp.debugShowWidgetInspectorOverride], which controls whether the
+  /// [WidgetsBinding.debugShowWidgetInspectorOverride], which controls whether the
   /// on-device widget inspector is visible.
   ///
   /// See also:
-  /// * [WidgetsApp.debugShowWidgetInspectorOverride], which is the flag that
+  /// * [WidgetsBinding.debugShowWidgetInspectorOverride], which is the flag that
   ///   this service extension exposes.
   /// * [WidgetInspectorService.initServiceExtensions], where the service
   ///   extension is registered.
@@ -144,7 +144,22 @@ enum WidgetInspectorServiceExtensions {
   ///   extension is registered.
   trackRebuildDirtyWidgets,
 
+  /// Name of service extension that, when called, returns the mapping of
+  /// widget locations to ids.
+  ///
+  /// This service extension is only supported if
+  /// [WidgetInspectorService._widgetCreationTracked] is true.
+  ///
+  /// See also:
+  ///
+  /// * [trackRebuildDirtyWidgets], which toggles dispatching events that use
+  ///   these ids to efficiently indicate the locations of widgets.
+  /// * [WidgetInspectorService.initServiceExtensions], where the service
+  ///   extension is registered.
+  widgetLocationIdMap,
+
   /// Name of service extension that, when called, determines whether
+  /// [WidgetInspectorService._trackRepaintWidgets], which determines whether
   /// a callback is invoked for every [RenderObject] painted each frame.
   ///
   /// See also:
@@ -216,7 +231,7 @@ enum WidgetInspectorServiceExtensions {
   ///   extension is registered.
   @Deprecated(
     'Use addPubRootDirectories instead. '
-    'This feature was deprecated after v3.1.0-9.0.pre.',
+    'This feature was deprecated after v3.18.0-2.0.pre.',
   )
   setPubRootDirectories,
 

@@ -86,7 +86,7 @@ void main() {
 
   });
 
- testWidgets('Dialog configurable to be barrier dismissible', (WidgetTester tester) async {
+  testWidgets('Dialog configurable to be barrier dismissible', (WidgetTester tester) async {
     await tester.pumpWidget(createAppWithCenteredButton(const Text('Go')));
 
     final BuildContext context = tester.element(find.text('Go'));
@@ -128,18 +128,19 @@ void main() {
   testWidgets('Dialog default action style', (WidgetTester tester) async {
     await tester.pumpWidget(
       CupertinoTheme(
-      data: const CupertinoThemeData(
-        primaryColor: CupertinoColors.systemGreen,
-      ),
-      child: boilerplate(const CupertinoDialogAction(
-        child: Text('Ok'),
-      )),
+        data: const CupertinoThemeData(
+          primaryColor: CupertinoColors.systemGreen,
+        ),
+        child: boilerplate(const CupertinoDialogAction(
+          child: Text('Ok'),
+        )),
       ),
     );
 
     final DefaultTextStyle widget = tester.widget(find.byType(DefaultTextStyle));
 
     expect(widget.style.color!.withAlpha(255), CupertinoColors.systemGreen.color);
+    expect(widget.style.fontFamily, 'CupertinoSystemText');
   });
 
   testWidgets('Dialog dark theme', (WidgetTester tester) async {
@@ -163,7 +164,7 @@ void main() {
       ),
     );
 
-    final RichText cancelText =  tester.widget<RichText>(
+    final RichText cancelText = tester.widget<RichText>(
       find.descendant(of: find.text('Cancel'), matching: find.byType(RichText)),
     );
 
@@ -298,11 +299,13 @@ void main() {
 
   testWidgets('Message is scrollable, has correct padding with large text sizes', (WidgetTester tester) async {
     final ScrollController scrollController = ScrollController();
+    addTearDown(scrollController.dispose);
     await tester.pumpWidget(
       createAppWithButtonThatLaunchesDialog(
         dialogBuilder: (BuildContext context) {
-          return MediaQuery(
-            data: MediaQuery.of(context).copyWith(textScaleFactor: 3.0),
+          return MediaQuery.withClampedTextScaling(
+            minScaleFactor: 3.0,
+            maxScaleFactor: 3.0,
             child: CupertinoAlertDialog(
               title: const Text('The Title'),
               content: Text('Very long content ' * 20),
@@ -344,7 +347,7 @@ void main() {
     // regular font. However, when using the test font, "Cancel" becomes 2 lines which
     // is why the height we're verifying for "Cancel" is larger than "OK".
 
-    if (!kIsWeb || isCanvasKit) { // https://github.com/flutter/flutter/issues/99933
+    if (!kIsWeb || isSkiaWeb) { // https://github.com/flutter/flutter/issues/99933
       expect(tester.getSize(find.text('The Title')), equals(const Size(270.0, 132.0)));
     }
     expect(tester.getTopLeft(find.text('The Title')), equals(const Offset(265.0, 80.0 + 24.0)));
@@ -354,6 +357,7 @@ void main() {
 
   testWidgets('Dialog respects small constraints.', (WidgetTester tester) async {
     final ScrollController scrollController = ScrollController();
+    addTearDown(scrollController.dispose);
     await tester.pumpWidget(
       createAppWithButtonThatLaunchesDialog(
         dialogBuilder: (BuildContext context) {
@@ -399,11 +403,13 @@ void main() {
 
   testWidgets('Button list is scrollable, has correct position with large text sizes.', (WidgetTester tester) async {
     final ScrollController actionScrollController = ScrollController();
+    addTearDown(actionScrollController.dispose);
     await tester.pumpWidget(
       createAppWithButtonThatLaunchesDialog(
         dialogBuilder: (BuildContext context) {
-          return MediaQuery(
-            data: MediaQuery.of(context).copyWith(textScaleFactor: 3.0),
+          return MediaQuery.withClampedTextScaling(
+            minScaleFactor: 3.0,
+            maxScaleFactor: 3.0,
             child: CupertinoAlertDialog(
               title: const Text('The title'),
               content: const Text('The content.'),
@@ -458,13 +464,12 @@ void main() {
   });
 
   testWidgets('Title Section is empty, Button section is not empty.', (WidgetTester tester) async {
-    const double textScaleFactor = 1.0;
     final ScrollController actionScrollController = ScrollController();
+    addTearDown(actionScrollController.dispose);
     await tester.pumpWidget(
       createAppWithButtonThatLaunchesDialog(
         dialogBuilder: (BuildContext context) {
-          return MediaQuery(
-            data: MediaQuery.of(context).copyWith(textScaleFactor: textScaleFactor),
+          return MediaQuery.withNoTextScaling(
             child: CupertinoAlertDialog(
               actions: const <Widget>[
                 CupertinoDialogAction(
@@ -511,13 +516,12 @@ void main() {
   });
 
   testWidgets('Button section is empty, Title section is not empty.', (WidgetTester tester) async {
-    const double textScaleFactor = 1.0;
     final ScrollController scrollController = ScrollController();
+    addTearDown(scrollController.dispose);
     await tester.pumpWidget(
       createAppWithButtonThatLaunchesDialog(
         dialogBuilder: (BuildContext context) {
-          return MediaQuery(
-            data: MediaQuery.of(context).copyWith(textScaleFactor: textScaleFactor),
+          return MediaQuery.withNoTextScaling(
             child: CupertinoAlertDialog(
               title: const Text('The title'),
               content: const Text('The content.'),
@@ -553,6 +557,7 @@ void main() {
 
   testWidgets('Actions section height for 1 button is height of button.', (WidgetTester tester) async {
     final ScrollController scrollController = ScrollController();
+    addTearDown(scrollController.dispose);
     await tester.pumpWidget(
       createAppWithButtonThatLaunchesDialog(
         dialogBuilder: (BuildContext context) {
@@ -582,11 +587,12 @@ void main() {
 
   testWidgets('Actions section height for 2 side-by-side buttons is height of tallest button.', (WidgetTester tester) async {
     final ScrollController scrollController = ScrollController();
+    addTearDown(scrollController.dispose);
     late double dividerWidth; // Will be set when the dialog builder runs. Needs a BuildContext.
     await tester.pumpWidget(
       createAppWithButtonThatLaunchesDialog(
         dialogBuilder: (BuildContext context) {
-          dividerWidth = 1.0 / MediaQuery.devicePixelRatioOf(context);
+          dividerWidth = 0.3;
           return CupertinoAlertDialog(
             title: const Text('The Title'),
             content: const Text('The message'),
@@ -627,11 +633,11 @@ void main() {
 
   testWidgets('Actions section height for 2 stacked buttons with enough room is height of both buttons.', (WidgetTester tester) async {
     final ScrollController scrollController = ScrollController();
-    late double dividerThickness; // Will be set when the dialog builder runs. Needs a BuildContext.
+    addTearDown(scrollController.dispose);
+    const double dividerThickness = 0.3;
     await tester.pumpWidget(
       createAppWithButtonThatLaunchesDialog(
         dialogBuilder: (BuildContext context) {
-          dividerThickness = 1.0 / MediaQuery.devicePixelRatioOf(context);
           return CupertinoAlertDialog(
             title: const Text('The Title'),
             content: const Text('The message'),
@@ -669,6 +675,7 @@ void main() {
 
   testWidgets('Actions section height for 2 stacked buttons without enough room and regular font is 1.5 buttons tall.', (WidgetTester tester) async {
     final ScrollController scrollController = ScrollController();
+    addTearDown(scrollController.dispose);
     await tester.pumpWidget(
       createAppWithButtonThatLaunchesDialog(
         dialogBuilder: (BuildContext context) {
@@ -697,17 +704,19 @@ void main() {
 
     expect(
       actionsSectionBox.size.height,
-      67.83333333333337,
+      67.80000000000001,
     );
   });
 
   testWidgets('Actions section height for 2 stacked buttons without enough room and large accessibility font is 50% of dialog height.', (WidgetTester tester) async {
     final ScrollController scrollController = ScrollController();
+    addTearDown(scrollController.dispose);
     await tester.pumpWidget(
       createAppWithButtonThatLaunchesDialog(
         dialogBuilder: (BuildContext context) {
-          return MediaQuery(
-            data: MediaQuery.of(context).copyWith(textScaleFactor: 3.0),
+          return MediaQuery.withClampedTextScaling(
+            minScaleFactor: 3.0,
+            maxScaleFactor: 3.0,
             child: CupertinoAlertDialog(
               title: const Text('The Title'),
               content: Text('The message\n' * 20),
@@ -743,6 +752,7 @@ void main() {
 
   testWidgets('Actions section height for 3 buttons without enough room is 1.5 buttons tall.', (WidgetTester tester) async {
     final ScrollController scrollController = ScrollController();
+    addTearDown(scrollController.dispose);
     await tester.pumpWidget(
       createAppWithButtonThatLaunchesDialog(
         dialogBuilder: (BuildContext context) {
@@ -777,8 +787,8 @@ void main() {
     expect(option1ButtonBox.size.width, option2ButtonBox.size.width);
     expect(option1ButtonBox.size.width, actionsSectionBox.size.width);
 
-    // Expected Height = button 1 + divider + 1/2 button 2 = 67.83333333333334
-    const double expectedHeight = 67.83333333333334;
+    // Expected Height = button 1 + divider + 1/2 button 2 = 67.80000000000001
+    const double expectedHeight = 67.80000000000001;
     expect(
       actionsSectionBox.size.height,
       moreOrLessEquals(expectedHeight),
@@ -787,6 +797,7 @@ void main() {
 
   testWidgets('Actions section overscroll is painted white.', (WidgetTester tester) async {
     final ScrollController scrollController = ScrollController();
+    addTearDown(scrollController.dispose);
     await tester.pumpWidget(
       createAppWithButtonThatLaunchesDialog(
         dialogBuilder: (BuildContext context) {
@@ -835,11 +846,11 @@ void main() {
 
   testWidgets('Pressed button changes appearance and dividers disappear.', (WidgetTester tester) async {
     final ScrollController scrollController = ScrollController();
-    late double dividerThickness; // Will be set when the dialog builder runs. Needs a BuildContext.
+    addTearDown(scrollController.dispose);
+    const double dividerThickness = 0.3;
     await tester.pumpWidget(
       createAppWithButtonThatLaunchesDialog(
         dialogBuilder: (BuildContext context) {
-          dividerThickness = 1.0 / MediaQuery.devicePixelRatioOf(context);
           return CupertinoAlertDialog(
             title: const Text('The Title'),
             content: const Text('The message'),
@@ -879,10 +890,10 @@ void main() {
     );
     final Offset bottomDividerCenter = Offset(
       secondButtonBox.size.width / 2.0,
-      firstButtonBox.size.height
-        + dividerThickness
-        + secondButtonBox.size.height
-        + (0.5 * dividerThickness),
+      firstButtonBox.size.height +
+          dividerThickness +
+          secondButtonBox.size.height +
+          (0.5 * dividerThickness),
     );
 
     // Before pressing the button, verify following expectations:
@@ -1182,8 +1193,9 @@ void main() {
       createAppWithButtonThatLaunchesDialog(
         useMaterial3: false,
         dialogBuilder: (BuildContext context) {
-          return MediaQuery(
-            data: MediaQuery.of(context).copyWith(textScaleFactor: 3.0),
+          return MediaQuery.withClampedTextScaling(
+            minScaleFactor: 3.0,
+            maxScaleFactor: 3.0,
             child: const RepaintBoundary(
               child: CupertinoAlertDialog(
                 title: Text('Title'),
@@ -1213,8 +1225,9 @@ void main() {
       createAppWithButtonThatLaunchesDialog(
         useMaterial3: true,
         dialogBuilder: (BuildContext context) {
-          return MediaQuery(
-            data: MediaQuery.of(context).copyWith(textScaleFactor: 3.0),
+          return MediaQuery.withClampedTextScaling(
+            minScaleFactor: 3.0,
+            maxScaleFactor: 3.0,
             child: const RepaintBoundary(
               child: CupertinoAlertDialog(
                 title: Text('Title'),
@@ -1311,13 +1324,12 @@ void main() {
 
   testWidgets('Conflicting scrollbars are not applied by ScrollBehavior to CupertinoAlertDialog', (WidgetTester tester) async {
     // Regression test for https://github.com/flutter/flutter/issues/83819
-    const double textScaleFactor = 1.0;
     final ScrollController actionScrollController = ScrollController();
+    addTearDown(actionScrollController.dispose);
     await tester.pumpWidget(
       createAppWithButtonThatLaunchesDialog(
         dialogBuilder: (BuildContext context) {
-          return MediaQuery(
-            data: MediaQuery.of(context).copyWith(textScaleFactor: textScaleFactor),
+          return MediaQuery.withNoTextScaling(
             child: CupertinoAlertDialog(
               title: const Text('Test Title'),
               content: const Text('Test Content'),
@@ -1495,8 +1507,9 @@ void main() {
     await tester.pumpWidget(
       createAppWithButtonThatLaunchesDialog(
         dialogBuilder: (BuildContext context) {
-          return MediaQuery(
-            data: MediaQuery.of(context).copyWith(textScaleFactor: 3.0),
+          return MediaQuery.withClampedTextScaling(
+            minScaleFactor: 3.0,
+            maxScaleFactor: 3.0,
             child: RepaintBoundary(
               child: CupertinoAlertDialog(
                 title: const Text('Title'),

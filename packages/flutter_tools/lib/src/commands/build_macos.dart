@@ -70,7 +70,9 @@ class BuildMacosCommand extends BuildSubCommand {
         logger: globals.logger,
         appFilenamePattern: 'App',
         flutterUsage: globals.flutterUsage,
+        analytics: analytics,
       ),
+      usingCISystem: usingCISystem,
     );
     return FlutterCommandResult.success();
   }

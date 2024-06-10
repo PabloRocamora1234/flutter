@@ -461,7 +461,7 @@ class _CupertinoSliverRefreshControlState extends State<CupertinoSliverRefreshCo
       } else {
         SchedulerBinding.instance.addPostFrameCallback((Duration timestamp) {
           setState(() => hasSliverLayoutExtent = false);
-        });
+        }, debugLabel: 'Refresh.goToDone');
       }
     }
 
@@ -497,7 +497,7 @@ class _CupertinoSliverRefreshControlState extends State<CupertinoSliverRefreshCo
                 }
               });
               setState(() => hasSliverLayoutExtent = true);
-            });
+            }, debugLabel: 'Refresh.transition');
           }
           return RefreshIndicatorMode.armed;
         }
@@ -558,7 +558,7 @@ class _CupertinoSliverRefreshControlState extends State<CupertinoSliverRefreshCo
               widget.refreshIndicatorExtent,
             );
           }
-          return Container();
+          return const LimitedBox(maxWidth: 0.0, maxHeight: 0.0, child: SizedBox.expand());
         },
       ),
     );
