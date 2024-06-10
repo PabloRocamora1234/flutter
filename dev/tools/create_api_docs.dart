@@ -522,12 +522,17 @@ class DartdocGenerator {
     final Version version = FlutterInformation.instance.getFlutterVersion();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     // Verify which version of snippets and dartdoc we're using.
     final ProcessResult snippetsResult = processManager.runSync(
 =======
     // Verify which version of the global activated packages we're using.
     final ProcessResult versionResults = processManager.runSync(
 >>>>>>> 4608a8913767116234e95cb7d73a410e9a7a2fc9
+=======
+    // Verify which version of the global activated packages we're using.
+    final ProcessResult versionResults = processManager.runSync(
+>>>>>>> 761747bfc538b5af34aa0d3fac380f1bc331ec49
       <String>[
         FlutterInformation.instance.getFlutterBinaryPath().path,
         'pub',

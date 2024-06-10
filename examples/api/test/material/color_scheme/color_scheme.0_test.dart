@@ -31,7 +31,11 @@ void main() {
       );
     }
     expect(coloredBox().color, const Color(0xff65558f));
+<<<<<<< HEAD
     await tester.tap(find.byIcon(Icons.settings));
+=======
+    await tester.tap(find.byType(MenuAnchor));
+>>>>>>> 761747bfc538b5af34aa0d3fac380f1bc331ec49
     await tester.pumpAndSettle();
     await tester.tap(find.byType(IconButton).at(6));
     await tester.pumpAndSettle();

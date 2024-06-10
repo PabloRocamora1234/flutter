@@ -7,6 +7,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_color_utilities/material_color_utilities.dart';
+<<<<<<< HEAD
+=======
+import 'package:material_color_utilities/scheme/scheme_fruit_salad.dart';
+import 'package:material_color_utilities/scheme/scheme_rainbow.dart';
+>>>>>>> 761747bfc538b5af34aa0d3fac380f1bc331ec49
 
 import '../image_data.dart';
 
@@ -787,7 +792,11 @@ void main() {
         seedColor: const Color(0xFF6559F5),
         dynamicSchemeVariant: DynamicSchemeVariant.fidelity
       ),
+<<<<<<< HEAD
       const Color(0xFF4C3CDB)
+=======
+      const Color(0xFF3F2CD0)
+>>>>>>> 761747bfc538b5af34aa0d3fac380f1bc331ec49
     );
     await _testFilledButtonColor(
       tester,
@@ -798,6 +807,7 @@ void main() {
       const Color(0xFF5D5F5F)
     );
   });
+<<<<<<< HEAD
 
   testWidgets('Colors in high-contrast color scheme matches colors in DynamicScheme', (WidgetTester tester) async {
     const Color seedColor = Colors.blue;
@@ -882,6 +892,8 @@ void main() {
       colorsMatchDynamicSchemeColors(schemeVariant, Brightness.dark, 0.5);
     }
   });
+=======
+>>>>>>> 761747bfc538b5af34aa0d3fac380f1bc331ec49
 }
 
 Future<void> _testFilledButtonColor(WidgetTester tester, ColorScheme scheme, Color expectation) async {

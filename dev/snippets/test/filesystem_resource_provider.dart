@@ -98,11 +98,14 @@ class FileSystemResourceProvider implements ResourceProvider {
       return true;
     }());
   }
+<<<<<<< HEAD
 
   @override
   Link getLink(String path) {
     throw UnimplementedError('getLink Not Implemented');
   }
+=======
+>>>>>>> 761747bfc538b5af34aa0d3fac380f1bc331ec49
 }
 
 /// A `dart:io` based implementation of [File].

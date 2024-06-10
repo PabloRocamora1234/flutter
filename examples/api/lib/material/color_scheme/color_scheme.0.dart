@@ -20,6 +20,7 @@ class ColorSchemeExample extends StatefulWidget {
 class _ColorSchemeExampleState extends State<ColorSchemeExample> {
   Color selectedColor = ColorSeed.baseColor.color;
   Brightness selectedBrightness = Brightness.light;
+<<<<<<< HEAD
   double selectedContrast = 0.0;
   static const List<DynamicSchemeVariant> schemeVariants = DynamicSchemeVariant.values;
 
@@ -30,6 +31,9 @@ class _ColorSchemeExampleState extends State<ColorSchemeExample> {
       selectedContrast = contrastLevel;
     });
   }
+=======
+  static const List<DynamicSchemeVariant> schemeVariants = DynamicSchemeVariant.values;
+>>>>>>> 761747bfc538b5af34aa0d3fac380f1bc331ec49
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +43,7 @@ class _ColorSchemeExampleState extends State<ColorSchemeExample> {
         colorScheme: ColorScheme.fromSeed(
           seedColor: selectedColor,
           brightness: selectedBrightness,
+<<<<<<< HEAD
           contrastLevel: selectedContrast,
         )
       ),
@@ -80,6 +85,84 @@ class _ColorSchemeExampleState extends State<ColorSchemeExample> {
                         contrastLevel: selectedContrast,
                       );
                     }).toList(),
+=======
+        )
+      ),
+      home: Builder(
+        builder: (BuildContext context) => Scaffold(
+          appBar: AppBar(
+            title: const Text('ColorScheme'),
+            actions: <Widget>[
+              Row(
+                children: <Widget>[
+                  const Text('Color Seed'),
+                  MenuAnchor(
+                    builder: (BuildContext context, MenuController controller, Widget? widget) {
+                      return IconButton(
+                        icon: Icon(Icons.circle, color: selectedColor),
+                        onPressed: () {
+                          setState(() {
+                            if (!controller.isOpen) {
+                              controller.open();
+                            }
+                          });
+                        },
+                      );
+                    },
+                    menuChildren: List<Widget>.generate(ColorSeed.values.length, (int index) {
+                      final Color itemColor = ColorSeed.values[index].color;
+                      return MenuItemButton(
+                        leadingIcon: selectedColor == ColorSeed.values[index].color
+                          ? Icon(Icons.circle, color: itemColor)
+                          : Icon(Icons.circle_outlined, color: itemColor),
+                        onPressed: () {
+                          setState(() {
+                            selectedColor = itemColor;
+                          });
+                        },
+                        child: Text(ColorSeed.values[index].label),
+                      );
+                    }),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 5),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                    child: Row(
+                      children: <Widget>[
+                        const Text('Brightness'),
+                        const SizedBox(width: 10),
+                        Switch(
+                          value: selectedBrightness == Brightness.light,
+                          onChanged: (bool value) {
+                            setState(() {
+                              selectedBrightness = value ? Brightness.light : Brightness.dark;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: List<Widget>.generate(schemeVariants.length, (int index) {
+                        return ColorSchemeVariantColumn(
+                          selectedColor: selectedColor,
+                          brightness: selectedBrightness,
+                          schemeVariant: schemeVariants[index],
+                        );
+                      }).toList(),
+                    ),
+>>>>>>> 761747bfc538b5af34aa0d3fac380f1bc331ec49
                   ),
                 ),
               ],
@@ -91,6 +174,7 @@ class _ColorSchemeExampleState extends State<ColorSchemeExample> {
   }
 }
 
+<<<<<<< HEAD
 class Settings extends StatefulWidget {
   const Settings({
     super.key,
@@ -191,18 +275,26 @@ class _SettingsState extends State<Settings> {
   }
 }
 
+=======
+>>>>>>> 761747bfc538b5af34aa0d3fac380f1bc331ec49
 class ColorSchemeVariantColumn extends StatelessWidget {
   const ColorSchemeVariantColumn({
     super.key,
     this.schemeVariant = DynamicSchemeVariant.tonalSpot,
     this.brightness = Brightness.light,
+<<<<<<< HEAD
     this.contrastLevel = 0.0,
+=======
+>>>>>>> 761747bfc538b5af34aa0d3fac380f1bc331ec49
     required this.selectedColor,
   });
 
   final DynamicSchemeVariant schemeVariant;
   final Brightness brightness;
+<<<<<<< HEAD
   final double contrastLevel;
+=======
+>>>>>>> 761747bfc538b5af34aa0d3fac380f1bc331ec49
   final Color selectedColor;
 
   @override
@@ -224,7 +316,10 @@ class ColorSchemeVariantColumn extends StatelessWidget {
               colorScheme: ColorScheme.fromSeed(
                 seedColor: selectedColor,
                 brightness: brightness,
+<<<<<<< HEAD
                 contrastLevel: contrastLevel,
+=======
+>>>>>>> 761747bfc538b5af34aa0d3fac380f1bc331ec49
                 dynamicSchemeVariant: schemeVariant,
               ),
             ),

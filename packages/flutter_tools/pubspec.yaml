@@ -52,7 +52,11 @@ dependencies:
   http_multi_server: 3.2.1
   convert: 3.1.1
   async: 2.11.0
+<<<<<<< HEAD
   unified_analytics: 6.1.0
+=======
+  unified_analytics: 5.8.8+1
+>>>>>>> 761747bfc538b5af34aa0d3fac380f1bc331ec49
 
   cli_config: 0.2.0
   graphs: 2.3.1
@@ -65,7 +69,11 @@ dependencies:
   test_api: 0.7.2
   test_core: 0.6.3
 
+<<<<<<< HEAD
   vm_service: 14.2.3
+=======
+  vm_service: 14.2.1
+>>>>>>> 761747bfc538b5af34aa0d3fac380f1bc331ec49
 
   standard_message_codec: 0.0.1+4
 
@@ -120,4 +128,8 @@ dartdoc:
   # Exclude this package from the hosted API docs.
   nodoc: true
 
+<<<<<<< HEAD
 # PUBSPEC CHECKSUM: 4c0d
+=======
+# PUBSPEC CHECKSUM: 067f
+>>>>>>> 761747bfc538b5af34aa0d3fac380f1bc331ec49

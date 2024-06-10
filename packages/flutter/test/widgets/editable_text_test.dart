@@ -17430,6 +17430,7 @@ void main() {
     expect(scrollController.offset, 75.0);
   });
 
+<<<<<<< HEAD
   testWidgets('getPositionForPoint is correct when EditableText is scaled', (WidgetTester tester) async {
     final GlobalKey key = GlobalKey();
     controller.text = 'Line1\nLine2\nLine3\nLine4\nLine5\nLine6\nLine7\nLine8';
@@ -17658,6 +17659,9 @@ void main() {
   testWidgets('Can implement TextEditingController', (WidgetTester tester) async {
     final _TextEditingControllerImpl controller = _TextEditingControllerImpl();
     addTearDown(controller.dispose);
+=======
+  testWidgets('Can implement TextEditingController', (WidgetTester tester) async {
+>>>>>>> 761747bfc538b5af34aa0d3fac380f1bc331ec49
     await tester.pumpWidget(
       MediaQuery(
         data: const MediaQueryData(),
@@ -17666,7 +17670,11 @@ void main() {
           child: EditableText(
             autofocus: true,
             backgroundCursorColor: Colors.grey,
+<<<<<<< HEAD
             controller: controller,
+=======
+            controller: _TextEditingControllerImpl(),
+>>>>>>> 761747bfc538b5af34aa0d3fac380f1bc331ec49
             focusNode: focusNode,
             style: textStyle,
             cursorColor: cursorColor,
